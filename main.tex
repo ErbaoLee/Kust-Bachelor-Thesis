@@ -1,0 +1,89 @@
+\documentclass{setup/kustthesis}
+
+\begin{document}
+{
+\pagenumbering{Roman}
+\setupTitleFormat
+
+% Abstract CN
+{
+\setupTOCCN
+\input{preface/abstract_cn}
+}
+\addcontentsline{toc}{section}{摘要}
+\newpage
+\phantom{s}
+\thispagestyle{empty}
+\clearpage
+\newpage
+
+% Abstract EN
+{
+\setupTOCEN
+\input{preface/abstract_en}
+}
+\addcontentsline{toc}{section}{ABSTRACT}
+\newpage
+\phantom{s}
+\thispagestyle{empty}
+\clearpage
+
+}
+
+% Table of Contents
+{
+\newpage
+{
+\setupTOCTOC
+\addcontentsline{toc}{section}{目录}
+}
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+} 
+\newpage
+\addcontentsline{toc}{section}{图片目录}
+\listoffigures
+
+\newpage
+\input{preface/foreword}
+\addcontentsline{toc}{section}{前言}
+
+\newpage
+
+
+% Main Chapters
+\setupTOCChapter
+\pagenumbering{arabic}
+\include{body}
+\newpage
+% Acknowledgements
+\input{appendix/acknowledgement}
+\addcontentsline{toc}{section}{谢辞}
+\newpage
+\phantom{s}
+\thispagestyle{empty}
+\clearpage
+\newpage
+
+% References
+\addcontentsline{toc}{section}{参考文献}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references/reference}
+% Note: The original used explicit numbers. 'plain' style auto-numbers. E.g. [1]. 
+% If original manual list had [1], plain is fine. 
+% If formatting differs, verify.
+
+\newpage
+\phantom{s}
+\thispagestyle{empty}
+\clearpage
+\newpage
+
+{
+\appendix
+\setupAppendix
+\input{appendix/appendix}
+}
+\end{document}

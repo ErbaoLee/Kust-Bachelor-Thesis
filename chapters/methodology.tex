@@ -1,0 +1,33 @@
+\section{研究方法}
+
+\subsection{系统框架}
+本文提出的视觉SLAM系统框架如图 \ref{fig:system_framework} 所示。系统主要由前端视觉里程计、后端优化、回环检测和建图四个模块组成。
+
+\begin{figure}[htbp]
+    \centering
+    % 使用简单的文本框模拟系统框架图，实际使用时请替换为真实图片
+    \framebox[0.8\textwidth][c]{\rule{0pt}{3cm}在此处插入系统框架图}
+    \caption{系统框架示意图}
+    \label{fig:system_framework}
+\end{figure}
+
+\subsection{前端视觉里程计}
+前端视觉里程计负责估计相邻图像帧之间的相机运动。本文采用光流法进行特征跟踪，以提高系统的实时性。
+
+假设 $t$ 时刻的图像为 $I_t$，特征点位置为 $(u, v)$，则光流方程可以表示为：
+\begin{equation}
+    I_x u + I_y v + I_t = 0
+\end{equation}
+其中，$I_x, I_y, I_t$ 分别为图像在 $x, y, t$ 方向的偏导数。
+
+\subsection{后端优化}
+后端优化模块用于消除前端累积的漂移误差。本文采用基于图优化的方法，构建位姿图（Pose Graph）进行全局优化。
+
+目标函数定义为：
+\begin{equation}
+    E(\mathbf{x}) = \sum_{ij} \mathbf{e}_{ij}^T \Omega_{ij} \mathbf{e}_{ij}
+\end{equation}
+其中，$\mathbf{x}$ 为状态变量，$\mathbf{e}_{ij}$ 为误差项，$\Omega_{ij}$ 为信息矩阵。
+
+\subsection{回环检测}
+回环检测模块通过识别机器人是否回到曾经访问过的位置，来消除累积误差。本文采用基于词袋模型（Bag of Words）的方法进行回环检测。
